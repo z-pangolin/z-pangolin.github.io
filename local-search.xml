@@ -8,7 +8,7 @@
     <link href="/2024/02/28/Html%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     <url>/2024/02/28/Html%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
     
-    <content type="html"><![CDATA[<p>##1.网页的构成<br>网页一般由三部分组成，分别是HTML（超文本标记语言）、CSS<strong>（层叠样式表）</strong>和JavaScript<strong>（简称“JS”动态脚本语言）</strong>，它们三者在网页中分别承担着不同的任务。</p><ul><li><strong>HTML 负责定义网页的内容</strong></li><li>**CSS 负责描述网页的布局</li><li>**JavaScript负责网页的行为</li></ul>]]></content>
+    <content type="html"><![CDATA[<h2 id="1-网页的构成"><a href="#1-网页的构成" class="headerlink" title="1.网页的构成"></a>1.网页的构成</h2><p>网页一般由三部分组成，分别是HTML（超文本标记语言）、CSS<strong>（层叠样式表）</strong>和JavaScript<strong>（简称“JS”动态脚本语言）</strong>，它们三者在网页中分别承担着不同的任务。</p><ul><li><strong>HTML 负责定义网页的内容</strong></li><li><strong>CSS 负责描述网页的布局</strong></li><li><strong>JavaScript负责网页的行为</strong></li></ul>]]></content>
     
     
     
