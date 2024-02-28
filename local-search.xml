@@ -8,20 +8,7 @@
     <link href="/2024/02/28/Html%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     <url>/2024/02/28/Html%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
     
-    <content type="html"><![CDATA[]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>测试文章</title>
-    <link href="/2024/02/27/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/"/>
-    <url>/2024/02/27/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/</url>
-    
-    <content type="html"><![CDATA[<p>这是一篇测试文章</p><img src="/2024/02/27/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" class="">]]></content>
+    <content type="html"><![CDATA[<p>##1.网页的构成<br>网页一般由三部分组成，分别是HTML（超文本标记语言）、CSS<strong>（层叠样式表）</strong>和JavaScript<strong>（简称“JS”动态脚本语言）</strong>，它们三者在网页中分别承担着不同的任务。</p><ul><li><strong>HTML 负责定义网页的内容</strong></li><li>**CSS 负责描述网页的布局</li><li>**JavaScript负责网页的行为</li></ul>]]></content>
     
     
     
