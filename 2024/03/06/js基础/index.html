@@ -1,0 +1,856 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="pangolin">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1.JavaScript简介 JavaScript 是一门跨平台、面向对象的脚本语言，它能使网页可交互（例如拥有复杂的动画，可点击的按钮，通俗的菜单等）。另外还有高级的服务端 Javascript 版本，例如 Node.js，它可以让你在网页上添加更多功能，不仅仅是下载文件（例如在多台电脑之间的协同合作）。在宿主环境（例如 web 浏览器）中，JavaScript 能够通过其所连接的环境提供的编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js基础">
+<meta property="og:url" content="http://example.com/2024/03/06/js%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Pangolin">
+<meta property="og:description" content="1.JavaScript简介 JavaScript 是一门跨平台、面向对象的脚本语言，它能使网页可交互（例如拥有复杂的动画，可点击的按钮，通俗的菜单等）。另外还有高级的服务端 Javascript 版本，例如 Node.js，它可以让你在网页上添加更多功能，不仅仅是下载文件（例如在多台电脑之间的协同合作）。在宿主环境（例如 web 浏览器）中，JavaScript 能够通过其所连接的环境提供的编程">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-05T16:04:49.000Z">
+<meta property="article:modified_time" content="2024-03-06T10:33:50.919Z">
+<meta property="article:author" content="pangolin">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>js基础 - Pangolin</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"o9EzKMkL17PsaqAvuGgPtfbb-gzGzoHsz","app_key":"iewAZN6WlQlznZAWtMHfsbma","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Pangolin</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="js基础"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-06 00:04" pubdate>
+          2024年3月6日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">js基础</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="1-JavaScript简介"><a href="#1-JavaScript简介" class="headerlink" title="1.JavaScript简介"></a>1.JavaScript简介</h2><ul>
+<li><p>JavaScript 是一门跨平台、面向对象的脚本语言，它能使网页可交互（例如拥有复杂的动画，可点击的按钮，通俗的菜单等）。另外还有高级的服务端 Javascript 版本，例如 Node.js，它可以让你在网页上添加更多功能，不仅仅是下载文件（例如在多台电脑之间的协同合作）。在宿主环境（例如 web 浏览器）中，JavaScript 能够通过其所连接的环境提供的编程接口进行控制。</p>
+</li>
+<li><p>JavaScript是一种动态弱类型语言</p>
+<table>
+<thead>
+<tr>
+<th align="center">JavaScript</th>
+<th align="center">Java</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">面向对象。不区分对象类型。通过原型机制继承，任何对象的属性和方法均可以被动态添加。存放任意类型。</td>
+<td align="center">基于类系统。分为类和实例，通过类层级的定义实现继承。不能动态增加对象或类的属性或方法。存放指定类型。</td>
+</tr>
+<tr>
+<td align="center">变量类型不需要提前声明 (动态类型)。任意时刻存放</td>
+<td align="center">变量类型必须提前声明 (静态类型)。</td>
+</tr>
+<tr>
+<td align="center">不能直接自动写入硬盘</td>
+<td align="center">可以直接自动写入硬盘。</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>如今，JavaScript 已经成为了与 HTML&#x2F;CSS 完全集成的，使用最广泛的浏览器语言。</p>
+</li>
+</ul>
+<h2 id="2-变量"><a href="#2-变量" class="headerlink" title="2.变量"></a>2.变量</h2><p>我们可以使用 var、let 或 const 声明变量来存储数据。</p>
+
+<ul>
+<li>let—现代的变量声明方式。</li>
+<li>var—老旧的变量声明方式。一般情况下，我们不会再使用它。<br><em>（var命令会发生“变量提升”现象，即变量可以在声明之前使用，值为undefined）</em><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs abnf">var a <span class="hljs-operator">=</span> []<span class="hljs-comment">;</span><br>for (var i <span class="hljs-operator">=</span> <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; 10; i++) &#123;</span><br>  a[i] <span class="hljs-operator">=</span> function () &#123;<br>    console.log(i)<span class="hljs-comment">;</span><br>  &#125;<span class="hljs-comment">;</span><br>&#125;<br>a[<span class="hljs-number">6</span>]()<span class="hljs-comment">;//10</span><br>//var声明的变量不具备块级作用域特性，是全局变量<br></code></pre></td></tr></table></figure></li>
+<li>const—类似于let，但是变量的值<strong>无法被修改</strong> 。<div style="border: #e5b832 solid 2px; border-radius: 10px; background-color: antiquewhite; padding: 5px;">变量应当以一种容易理解变量内部是什么的方式进行命名。</div></li>
+</ul>
+<h2 id="3-JavaScript标识符"><a href="#3-JavaScript标识符" class="headerlink" title="3.JavaScript标识符"></a>3.JavaScript标识符</h2><p>所有JavaScript变量必须<strong>以唯一的名称</strong>的标识。<br>这些唯一的名称称为标识符。<br>构造变量名称（唯一标识符）的通用规则是：</p>
+<ul>
+<li>名称可包含字母、数字、下划线和美元符号</li>
+<li>名称也可以以字母，$和_开头</li>
+<li>名称对大小写敏感（y和Y是不同的变量）</li>
+<li>保留字无法用作变量名称</li>
+</ul>
+<p>##数据类型<br>JavaScript 中有八种基本的数据类型（译注：前七种为基本数据类型，也称为原始类型，而 object 为复杂数据类型）。</p>
+<ul>
+<li>Number<ul>
+<li>用于任何类型的数字：整数或浮点数，在 ±(253-1) 范围内的整数。</li>
+</ul>
+</li>
+<li>Bigint<ul>
+<li>用于任意长度的整数。</li>
+</ul>
+</li>
+<li>String<ul>
+<li>用于字符串：一个字符串可以包含 0 个或多个字符，所以没有单独的单字符类型。</li>
+</ul>
+</li>
+<li>Boolean<ul>
+<li>用于 true 和 false。</li>
+<li>true不一定等于1,false不一定等于0。</li>
+</ul>
+</li>
+<li>Null<ul>
+<li>用于未知的值 —— 只有一个 null 值的独立类型。</li>
+<li>null是表示一个空对象指针。</li>
+</ul>
+</li>
+<li>Undefined<ul>
+<li>用于未定义的值 —— 只有一个 undefined 值的独立类型。</li>
+<li>在使用var 声明变量但未对其加初始化时，这个变量就是undefined。</li>
+</ul>
+</li>
+<li>Symbol<ul>
+<li>用于唯一的标识符。</li>
+</ul>
+</li>
+<li>Object<ul>
+<li>用于更复杂的数据结构，比如 function、Array、Date。</li>
+</ul>
+</li>
+</ul>
+<div style="border: #e5b832 solid 2px; border-radius: 7px; background-color: antiquewhite; padding: 5px;">我们可以通过 typeof 运算符查看存储在变量中的数据类型。</div>
+<br>
+
+<ul>
+<li>我们可以通过 typeof 运算符查看存储在变量中的数据类型。</li>
+<li>以字符串的形式返回类型名称，例如 “string”。</li>
+<li>typeof null 会返回 “object” —— 这是 JavaScript 编程语言的一个错误，实际上它并不是一个 object。</li>
+</ul>
+<h2 id="5-值的比较"><a href="#5-值的比较" class="headerlink" title="5.值的比较"></a>5.值的比较</h2><ul>
+<li><p>运算符</p>
+<table>
+<thead>
+<tr>
+<th align="center">等值检测运算符</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&#x3D;&#x3D;（不相等）</td>
+<td align="center">比较两个操作数的值是否相等</td>
+</tr>
+<tr>
+<td align="center">!&#x3D;（不相等）</td>
+<td align="center">比较两个操作数的值是否不相等</td>
+</tr>
+<tr>
+<td align="center">&#x3D;&#x3D;&#x3D;（全等）</td>
+<td align="center">比较两个操作数的值是否相等，同时检测它们的类型是否相同</td>
+</tr>
+<tr>
+<td align="center">!&#x3D;&#x3D;（不全等）</td>
+<td align="center">比较两个操作数的值是否不相等，同时检测它们的类型是否不相同</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>比较规则</p>
+<p> 1.比较运算符始终返回布尔值。<br> 2.字符串的比较，会按照“词典”顺序逐字符地比较大小。<br> 3.在相等运算中，应注意以下几个问题：</p>
+<ul>
+<li>如果操作数是布尔值，则先转换为数值，其中false转为0，true转换为1。</li>
+<li>果一个操作数是字符串，另一个操作数是数字，则先尝试把字符串转换为数字。</li>
+<li>如果一个操作数是字符串，另一个操作数是对象，则先尝试把对象转换为字符串。</li>
+<li>如果一个操作数是数字，另一个操作数是对象，则先尝试把对象转换为数字。</li>
+<li>如果两个操作数都是对象，则比较引用地址。如果引用地址相同，则相等；否则不等。  <div style="border: #e5b832 solid 2px; border-radius: 7px; background-color: antiquewhite; padding: 5px;">
+  <ol>
+  <li>在非严格相等 == 下，null 和 undefined 相等且各自不等于任何其他的值。</li>
+  <li>NaN与任何值都不相等，包括它自己。任何操作数与NaN比较，都是false</li>
+  <li>在使用>或&lt进行比较时，需要注意变量可能为 null/undefined 的情况。比较好的方法是单独检查变量是否等于 null/undefined。</li>
+  </ol>
+  </div></li>
+</ul>
+</li>
+</ul>
+<h2 id="6-类型转换"><a href="#6-类型转换" class="headerlink" title="6.类型转换"></a>6.类型转换</h2><p>a.显式类型转换</p>
+<ul>
+<li><strong>toString()</strong><br>该方法不会影响到原变量，它会将转换的结构返回。但是注意，Null和Undefined没有toString()方法，如果调用它们的方法，则会报错。<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf">var a <span class="hljs-operator">=</span> <span class="hljs-number">123</span><span class="hljs-comment">;</span><br><span class="hljs-attribute">a</span> <span class="hljs-operator">=</span> a.toString()<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure></li>
+<li><strong>String()</strong><br>将被转换的数据作为参数传递给函数。使用String函数做类型强制转换时，对于Number和Boolean就是调用toString()方法，对于null和undefined，就不会调用toString()方法，它会将null直接转换成”null”，将undefined转换成”undefined”。<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf">var a <span class="hljs-operator">=</span> <span class="hljs-number">123</span><span class="hljs-comment">;</span><br><span class="hljs-attribute">a</span> <span class="hljs-operator">=</span> String(a)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>b.将其他的数据类型转换为Number类型</p>
+<ul>
+<li>Number()<br>1.如果是纯数字的字符串，则直接将其转换为数字。<br>2.如果字符串中有非数字的内容，则转换为NaN。<br>3.布尔类型转换成数字：Ture转成1；False转成0。<br>4.Null转成数字0。<br>5.Undefined转成数字NaN。<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">var</span> a = <span class="hljs-string">&#x27;123&#x27;</span>;<br>a = <span class="hljs-built_in">Number</span>(a);<span class="hljs-comment">//a:123</span><br><span class="hljs-keyword">var</span> a = <span class="hljs-string">&#x27;123abc&#x27;</span>;<br>a = <span class="hljs-built_in">Number</span>(a);<span class="hljs-comment">//a:NaN</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li>parseInt()，parseFloat()<div style="border: #e5b832 solid 2px; border-radius: 7px; background-color: antiquewhite; padding: 5px;">针对字符串转换成数字</div></li>
+</ul>
+<ol>
+<li>parseInt()把一个字符串转换为一个整数，只取整数部分；</li>
+<li>parseFloat()把一个字符串转换为一个浮点数，可获得有效小数;</li>
+<li>对非String使用parseInt()或parseFloat()，它会将其转换为String.</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = <span class="hljs-string">&#x27;123abc&#x27;</span>,<br><span class="hljs-keyword">var</span> b = <span class="hljs-string">&#x27;12.34.56ab&#x27;</span>;<br>a = <span class="hljs-built_in">parseInt</span>(a);<span class="hljs-comment">//a:123</span><br>b = <span class="hljs-built_in">parseFloat</span>(b);<span class="hljs-comment">//b:12.34</span><br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>js基础</div>
+      <div>http://example.com/2024/03/06/js基础/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>pangolin</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月6日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/29/CSS/" title="CSS">
+                        <span class="hidden-mobile">CSS</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"o9EzKMkL17PsaqAvuGgPtfbb-gzGzoHsz","appKey":"iewAZN6WlQlznZAWtMHfsbma","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -16,15 +16,21 @@
   <meta name="author" content="pangolin">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="一.CSS选择器的概念          CSS选择器，是元素和其他部分组合起来告诉浏览器哪个 HTML 元素应当是被选为应用规则中的 CSS 属性值的方式。                                通配选择器，由一个星号（*）代指它选中了文档中的所有内容。             类型选择器，也叫标签名选择器或者是元素选择器，它在文档中选择了一个 HTML 标签&#x2F;元素">
+<meta property="og:type" content="article">
 <meta property="og:title" content="CSS">
 <meta property="og:url" content="http://example.com/2024/02/29/CSS/index.html">
 <meta property="og:site_name" content="Pangolin">
+<meta property="og:description" content="一.CSS选择器的概念          CSS选择器，是元素和其他部分组合起来告诉浏览器哪个 HTML 元素应当是被选为应用规则中的 CSS 属性值的方式。                                通配选择器，由一个星号（*）代指它选中了文档中的所有内容。             类型选择器，也叫标签名选择器或者是元素选择器，它在文档中选择了一个 HTML 标签&#x2F;元素">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/02/29/CSS/1_%E5%89%AF%E6%9C%AC.png">
+<meta property="og:image" content="http://example.com/2024/02/29/CSS/2_%E5%89%AF%E6%9C%AC.png">
+<meta property="og:image" content="http://example.com/2024/02/29/CSS/3_%E5%89%AF%E6%9C%AC.png">
 <meta property="article:published_time" content="2024-02-29T10:40:39.000Z">
-<meta property="article:modified_time" content="2024-02-29T10:40:39.690Z">
+<meta property="article:modified_time" content="2024-02-29T14:02:11.943Z">
 <meta property="article:author" content="pangolin">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2024/02/29/CSS/1_%E5%89%AF%E6%9C%AC.png">
   
   
   
@@ -246,7 +252,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          1.7k 字
         
       </span>
     
@@ -257,7 +263,7 @@
         
         
         
-          1 分钟
+          15 分钟
         
       </span>
     
@@ -307,7 +313,87 @@
             
               <div class="markdown-body">
                 
-                
+                <h2 id="section9">一.CSS选择器的概念</h2>
+    <br>
+    <p>CSS选择器，是元素和其他部分组合起来告诉浏览器哪个 HTML 元素应当是被选为应用规则中的 CSS 属性值的方式。</p>
+    <br>
+    <div style="border: 3px solid gold;">
+        <ol>
+            <li>通配选择器，由一个星号（*）代指它选中了文档中的所有内容。</li>
+            <li>类型选择器，也叫标签名选择器或者是元素选择器，它在文档中选择了一个 HTML 标签/元素</li>
+            <li>类选择器，以一个句点（.）开头，会选择文档中应用了这个类的所有物件。</li>
+            <li>id选择器，开头为#而非句点，不过基本上和类选择器是同种用法。一个 ID 只会一般用到一次，虽然用多次也能正常显示，但是用javascript通过id来控制元素时就会出现错误。</li>
+        </ol>
+    </div>
+   <img src="/2024/02/29/CSS/1_%E5%89%AF%E6%9C%AC.png" srcset="/img/loading.gif" lazyload class="">
+    <p>层叠是 CSS 的一个基本特征，意为多个选择符之间具有特定的优先级，它是一个定义了如何合并来自多个源的属性值的算法。</p>
+    <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css">&#123;<br><span class="hljs-attribute">color</span>:red;<br>&#125;<br>      <br><span class="hljs-selector-tag">p</span>&#123;<br><span class="hljs-attribute">color</span>:bule;<br>&#125;<br></code></pre></td></tr></table></figure>
+    <div>在上面的代码块中，我们为p选择器定义了两个规则，但是段落最后是蓝色的。这是因为将其设置为蓝色的声明将出现在样式表的后面，而稍后的样式将覆盖以前的样式。</div>
+    <br>
+    <div>这是在同样优先级的情况下，如果在优先级不同时，</div>
+    <br>
+    <div>比如，在我们同时使用了类选择器和元素选择器的前一个例子中，类将获胜，使得段落变红——即使它出现在样式表的前面。</div>
+    <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.special</span>&#123;<br><span class="hljs-attribute">color</span>:aqua;<br>&#125;<br>       <br><span class="hljs-selector-tag">p</span>&#123;<br><span class="hljs-attribute">color</span>:black;<br>&#125;<br></code></pre></td></tr></table></figure>
+    <div>所以，在同优先级的情况下，后定义的生效，不同级则优先级高的生效。</div>
+    <br>
+    <div>各优先级关系，一般来说，选择器的优先级，范围越小，优先级越高</div>
+    <br>
+    <div>id选择器 > 类选择器 > 元素选择器 > 通配符选择器</div>
+      <img src="/2024/02/29/CSS/2_%E5%89%AF%E6%9C%AC.png" srcset="/img/loading.gif" lazyload class="">
+    <h2 id="section10">二.CSS基本样式</h2>
+    <br>
+    <h3>常用样式</h3>
+    <h4>1.font-size:字体大小px</h4>
+    <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">font-weight</span>:normal;//字体粗细<br><span class="hljs-attribute">font-style</span>:italic;//字体倾斜<br></code></pre></td></tr></table></figure>
+    <br>
+    <h4>2.text-align:center;//文本对齐</h4>
+       <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">text-decoration</span>: none; //无装饰<br> <span class="hljs-attribute">text-decoration</span>: overline; //上划线<br> <span class="hljs-attribute">text-decoration</span>: line-through; //中划线<br> <span class="hljs-attribute">text-decoration</span>: underline; //下划线<br> <span class="hljs-attribute">text-transform</span>: uppercase; //文本转换，全部换为大写字母<br> <span class="hljs-attribute">text-indent</span>: <span class="hljs-number">50px</span>; //首行缩进<br><span class="hljs-attribute">letter-spacing</span>: <span class="hljs-number">3px</span>; //字母间距<br> <span class="hljs-attribute">word-spacing</span>: <span class="hljs-number">10px</span>; //单词间距<br> <span class="hljs-attribute">line-height</span>: <span class="hljs-number">0.8</span>; //行间距<br> <span class="hljs-attribute">white-space</span>: nowrap; //禁用<span class="hljs-selector-tag">html</span>框中文字编辑时的换行符（不必懂）<br> <span class="hljs-attribute">text-shadow</span>: <span class="hljs-number">2px</span> <span class="hljs-number">2px</span> <span class="hljs-number">5px</span> red;//分别是文本的水平、垂直阴影以及阴影的模糊效果、阴影颜色<br></code></pre></td></tr></table></figure>
+    <h4>3.color:字体颜色</h4>
+        <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs css">使用 <span class="hljs-attribute">color</span> 属性：可以直接为元素指定 <span class="hljs-attribute">color</span> 属性来设置字体颜色<br><span class="hljs-selector-tag">p</span> &#123;<br>    <span class="hljs-attribute">color</span>: red;<br>&#125;<br><br>使用 RGB 值：可以使用 RGB 值来指定颜色<br><span class="hljs-selector-tag">p</span> &#123;<br>    <span class="hljs-attribute">color</span>: <span class="hljs-built_in">rgb</span>(<span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>); <br>&#125;<br><br>使用十六进制值：也可以使用十六进制值来指定颜色<br><span class="hljs-selector-tag">p</span> &#123;<br>    <span class="hljs-attribute">color</span>: <span class="hljs-number">#ff0000</span>; <br>&#125;<br></code></pre></td></tr></table></figure>
+    <br>
+    <h4>4.background:背景样式</h4>
+           <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">background-color</span>: blue; //颜色名称方式<br><span class="hljs-attribute">background-color</span>: <span class="hljs-built_in">rgb</span>(<span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>); //RGB方式<br><span class="hljs-attribute">background-color</span>: <span class="hljs-number">#ff0000</span>; //十六进制方式<br><span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">&quot;bg.png&quot;</span>) ; //设置背景图片<br><span class="hljs-attribute">background-size</span>: contain/cover; // 图片相对于盒子的尺寸<br><span class="hljs-attribute">background-repeat</span>: repeat-x; //沿x方向阵列<br><span class="hljs-attribute">background-position</span>: right top; //设置背景图片初始位置<br><span class="hljs-attribute">background-attachment</span>: fixed; //背景图片是否随网页滑动<br><span class="hljs-attribute">background</span>: <span class="hljs-number">#ffffff</span> <span class="hljs-built_in">url</span>(<span class="hljs-string">&quot;tree.png&quot;</span>) no-repeat right top;//简写形式<br></code></pre></td></tr></table></figure>
+    <br>
+    <h4>5.height,width,margin,padding、border</h4>
+      <img src="/2024/02/29/CSS/3_%E5%89%AF%E6%9C%AC.png" srcset="/img/loading.gif" lazyload class="">
+            <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">div</span>&#123;<br>    <span class="hljs-attribute">width</span>:<span class="hljs-number">300px</span>;<br>    <span class="hljs-attribute">border-style</span>: solid; // 边框样式<br>    <span class="hljs-attribute">border-color</span>: <span class="hljs-number">#ccc</span>; // 边框颜色<br>    <span class="hljs-attribute">border-width</span>: <span class="hljs-number">15px</span>; // 边框宽度<br>    <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>; //允许你设置元素的外边框圆角,该属性是将这四个属性<span class="hljs-attribute">border-top-left-radius</span>,<span class="hljs-attribute">border-top-right-radius</span>,<span class="hljs-attribute">border-bottom-right-radius</span>,<span class="hljs-attribute">border-bottom-left-radius</span>简写为一个属性。<br>    <span class="hljs-attribute">border</span>: <span class="hljs-number">15px</span> solid green; //边框粗细 实线 颜色，dotted是点线，double是双线，dashed是虚线<br>    <span class="hljs-attribute">padding</span>: <span class="hljs-number">50px</span>;<br>    <span class="hljs-attribute">margin</span>: <span class="hljs-number">20px</span>;<br>&#125;<br>   //<span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>; 设置内容的高度<br>   //<span class="hljs-attribute">width</span>: <span class="hljs-number">50%</span>; 设置内容的宽度<br></code></pre></td></tr></table></figure>
+    <h4>6.outline-style:轮廓样式</h4>
+            <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">outline-color</span>: red; //轮廓颜色<br><span class="hljs-attribute">outline-style</span>: dotted; //轮廓样式<br><span class="hljs-attribute">outline-width</span>: thin; 轮廓宽度<br><span class="hljs-attribute">outline</span>: <span class="hljs-number">5px</span> solid yellow; 简写轮廓属性<br>&lt;<span class="hljs-attribute">outline-offset</span>: <span class="hljs-number">25px</span>;//轮廓偏移<br></code></pre></td></tr></table></figure>
+    <h4>7.轮廓（outline）与边框（border）的区别：</h4>
+ <div style="border: 3px solid rgb(253, 232, 179);">
+        <ol type="a">
+            <li>border 可应用于几乎所有有形的 html 元素，而 outline 是针对链接、表单控件等元素设计。</li>
+            <li>outline 的效果将随元素的 focus 而自动出现(除非手动设置outline-style)，相应的由 blur（blur事件，即指元素失去焦点） 而自动消失。这些都是浏览器的默认行为，无需JavaScript 配合 CSS 来控制。</li>
+            <li>outline 是不占空间的，不会像 border 那样影响元素的尺寸或者位置，既不会增加额外的 width 或者 height</li>
+            <li>对于input之类的表单控件，当你手动设置outline-style，它将不会采用默认的触发方式，而是直接显示，在没有手动设置outline-style的情况下，outline-width不生效</li>
+        </ol>
+    </div>
+     <h4>7.cursor的常用方法</h4>
+     <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs scss">auto：浏览器自动决定合适的光标。<br>default：默认光标，通常是一个箭头。<br>pointer：手形光标，表示链接。<br>help：帮助光标，通常是一个问号。<br>wait：等待光标，表示正在加载或处理中。<br>text：文本光标，表示可编辑文本。<br>move：移动光标，表示可移动对象。<br>not-allowed：禁止操作光标，表示不允许点击或操作。<br></code></pre></td></tr></table></figure>
+    <h2 id="section11">三.CSS伪元素和伪类</h2>
+    <h3>什么是伪类？</h3>
+    <div>伪类是选择器的一种，它用于选择处于特定状态的元素。</div>
+    <h4>语法</h4>
+    <div>伪类就是开头为冒号的关键字：</div>
+    <figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs delphi">selector:pseudo-<span class="hljs-keyword">class</span>-<span class="hljs-keyword">name</span><span class="hljs-comment">&#123;&#125;</span><br></code></pre></td></tr></table></figure>
+    <h4>常见伪类</h4>
+    <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-pseudo">:hover</span> <span class="hljs-comment">/* 在用户将指针挪到元素上的时候才会激活 */</span><br><span class="hljs-selector-pseudo">:focus</span> <span class="hljs-comment">/* 获得焦点的元素激活 */</span><br><span class="hljs-selector-pseudo">:active</span> <span class="hljs-comment">/* 当元素被激活（例如，当按钮被点击并保持按下状态）时应用样式。*/</span><br></code></pre></td></tr></table></figure>
+    <h3>什么是伪元素？</h3>
+    <div>伪元素是一个附加至选择器末的关键词，允许你对被选择元素的特定部分修改样式。</div>
+    <h4>语法</h4>
+    <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">selector:</span>:<span class="hljs-title class_">pseudo-element</span> <span class="hljs-punctuation">&#123;</span><br><span class="hljs-symbol">          property:</span> <span class="hljs-attr">value</span><span class="hljs-punctuation">;</span><br>  <span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+    <h4>常见伪元素</h4>
+    <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-pseudo">::after</span> <span class="hljs-comment">/* 用来创建一个伪元素，作为已选中元素的最后一个子元素,通常会配合content属性来为该元素添加装饰内容。这个虚拟元素默认是行内元素 */</span><br><span class="hljs-selector-pseudo">::before</span> <span class="hljs-comment">/* 用来创建一个伪元素，作为已选中元素的第一个子元素，其余同上 */</span><br><span class="hljs-attribute">content</span> <span class="hljs-comment">/* 用于在元素的 ::before 和 ::after 伪元素中插入内容 */</span><br></code></pre></td></tr></table></figure>
+    <h3>html与css的结合方式</h3>
+    <ol>
+        <li>行内式：html中的标签属性 style ：适用于单纯只有一个标签需要设置时的特殊样式。如果多个标签需要应用同一个样式，建议采用内嵌式。</li>
+          <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;color: blue;background-color: yellow;border: 1px solid black;&quot;</span>&gt;</span>Hello World<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br></code></pre></td></tr></table></figure>
+        <li>内嵌式：建议在head中使用，使用标签 style 适用于当前页面多个标签使用同一个样式。</li>
+        <li>外链式：link:适用于多个页面使用同一个样式时。</li>
+    </ol>
+    <div style="text-align:left;"><strong>注意：link中href属性必须有，表示链接的css文件。</strong></div>
+   
+
                 
               </div>
             
@@ -368,6 +454,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/03/06/js%E5%9F%BA%E7%A1%80/" title="js基础">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">js基础</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
