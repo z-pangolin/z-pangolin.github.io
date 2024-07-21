@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url(../assets/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100vh;
+    width: 100vw;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    z-index: 0;
+}
+
+
+#CollectBox {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    position: relative;
+    top: 3vh;
+    left: 20vw;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    width: 60vw;
+    height: 83vh;
+}
+
+#title {
+    padding: 20px;
+    font-size: 20px;
+}
+
+.CollectItem {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: ; */
+    align-items: center;
+    /* width: 90px;
+    height: 113px; */
+}
+
+.CollectItemPicture {
+    opacity: 0.36;
+    width: 100px;
+    height: 90px;
+    border-radius: 17px;
+    transition: opacity 0.3s ease;
+}
+
+.SpecialCollectItemPicture {
+    opacity: 0.36;
+    width: 105px;
+    height: 95px;
+    border-radius: 17px;
+    transition: opacity 0.3s ease;
+}
+
+@media only screen and (max-width: 500px) {
+
+    .CollectItemPicture,
+    .SpecialCollectItemPicture {
+        width: 18vw;
+        height: 8vh;
+        border-radius: 10px;
+        /* 较小的圆角 */
+    }
+
+    #CollectBox {
+        top: 3vh;
+        left: 5vw;
+        width: 90vw;
+        height: 83vh;
+    }
+
+}
+
+.CollectItemPicture:hover {
+    opacity: 1;
+}
+
+
+
+.SpecialCollectItemPicture:hover {
+    opacity: 1;
+}
+
+#front {
+    top: 100px;
+    left: 280px;
+}
+
+#product {
+    top: 179px;
+    right: 92px;
+}
+
+#lot {
+    top: 228px;
+    left: 100px;
+}
+
+#acm {
+    top: 315px;
+    right: 250px;
+}
+
+#back {
+    top: 400px;
+    left: 45px;
+}
+
+#safe {
+    top: 420px;
+    right: 20px;
+}
+
+#game {
+    top: 490px;
+}
+
+.DecorationBox {
+    position: absolute;
+    bottom: -120px;
+}
+
+.decoration {
+    width: 200px;
+    height: 200px;
+    opacity: 0.85;
+}
