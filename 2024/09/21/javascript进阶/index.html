@@ -24,7 +24,7 @@
 <meta property="og:description" content="1.作用域1.1编译原理传统编译语言  分词&#x2F;词法分析 这个过程将由字符组成的字符串分解成有意义的代码块，这些代码块被称为词法单元。例如。var a&#x3D;2；这段代码会被分解为var，a，&#x3D;，2；空格是否会被当成词法单元取决于空格在这门语言中是否有意义  [!IMPORTANT] 分词和词法解析之间的区别是非常微妙，晦涩的。主要差异在于 词法单元的识别是通过有状态还是无状">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-21T05:54:31.000Z">
-<meta property="article:modified_time" content="2024-09-21T06:29:30.574Z">
+<meta property="article:modified_time" content="2024-09-23T08:46:11.317Z">
 <meta property="article:author" content="pangolin">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -248,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          229 字
+          1.6k 字
         
       </span>
     
@@ -259,7 +259,7 @@
         
         
         
-          2 分钟
+          13 分钟
         
       </span>
     
@@ -319,9 +319,56 @@
 </blockquote>
 </li>
 <li><p>解析&#x2F;语法分析</p>
+<p>这个过程是将词法单元流(数组)转换成一个由元素逐级嵌套所组成的代表了程序语法结构的树。这个树被称为“抽象语法树”</p>
+<p>var a&#x3D;2；的抽象语法树中可能会有一个叫做VaribleDeclaration的顶级节点，接下来是一个叫做Ideentifier（他的值是a）的子节点，以及一个叫做AssignmentExpression的子节点。该节点有一个叫做NumeriLiteral（他的值是2）的子节点</p>
 </li>
-<li></li>
+<li><p>代码生成</p>
+<p>将抽象语法树(AST)转化为可执行代码的过程被称为代码生成。这个过程与语言，目标平台等息息相关。</p>
+<p>抛开具体细节，简单里说就是有某种方法可以将var a&#x3D;2；的抽象语法树转化为一组机器指令。用来创建一个叫做a的变量(包括分配内存等),并将一个值储存在a中；</p>
+</li>
 </ul>
+<p><strong>js语言</strong></p>
+<blockquote>
+<p>[!NOTE]</p>
+<p>首先，js引擎不会有大量的时间用来进行优化，因为与其他语言不同，js的编译过程不是发生在构建之前的。</p>
+<p>简单来说，任何js代码片段在执行之前都要进行编译，因此，js编译器首先会对var a&#x3D;2；这段程序进行编译，然后做好执行它的准备，并且通常马上就去执行。</p>
+</blockquote>
+<h3 id="1-2理解作用域"><a href="#1-2理解作用域" class="headerlink" title="1.2理解作用域"></a>1.2理解作用域</h3><h4 id="代码处理中的演员"><a href="#代码处理中的演员" class="headerlink" title="代码处理中的演员"></a>代码处理中的演员</h4><ul>
+<li><p>引擎</p>
+<p>从头到尾负责对整个js程序的编译与执行过程</p>
+</li>
+<li><p>编译器</p>
+<p>引擎的好朋友之一，负责语法分析及代码生成等脏活累活</p>
+</li>
+<li><p>作用域</p>
+<p>引擎的另一个好朋友。<strong>负责收集并维护由所有标识符（变量）组成的一系列查询，</strong>并且实施一套非常严格的规则，确定当前执行的代码对这些标识符的访问权限。</p>
+</li>
+</ul>
+<h4 id="代码处理的步骤"><a href="#代码处理的步骤" class="headerlink" title="代码处理的步骤"></a>代码处理的步骤</h4><ol>
+<li><p>遇到var a，编译器会询问作用域中是否含有一个具有相同名称的变量已经声明，如果是，则忽略该声明，继续进行编译，否则他就会要求作用域在当前作用域下声明一个新的变量a</p>
+</li>
+<li><p>接下来编译器会为引擎生成运行时所需的代码，这些代码被用来处理a&#x3D;2这个赋值操作。引擎运行时会首先询问作用域，在当前的作用域集合中是否存在一个叫做a的变量。如果是，引擎就会使用这个变量，如果否，引擎会继续查找变量。</p>
+<p>如果引擎最终找到a变量，就会将2赋值给它，否则引擎就会举手示意并抛出一个异常</p>
+</li>
+</ol>
+<blockquote>
+<p>[!IMPORTANT]</p>
+<p>变量的赋值操作会进行两个动作，首先编译器会在当前作用域声明一个变量（如果之前没有声明过），然后在运行时引擎会在作用域中查找该变量，如果能找到就会对它赋值。</p>
+</blockquote>
+<h4 id="编译器有话说"><a href="#编译器有话说" class="headerlink" title="编译器有话说"></a>编译器有话说</h4><p>编译器在编译过程中第二步就生成了代码，引擎执行它时，会通过查找变量a判断是否已经声明。查找的过程中由作用域协助，但是引擎执行怎么样的查找，会影响最终的查找结果。</p>
+<p><strong>LHS与RHS查询</strong></p>
+<p><strong>当变量出现在赋值操作的左侧时进行RHS查询，出现在右侧进行RHS查询</strong>，RHS查询与查询 某个变量的值别无一致，LHS查询则是试图找到变量容器本身，从而可以对其赋值。从这个角度说，<strong>RHS并不是真正意义上的“赋值操作的右侧”，更准确地说是“非左侧”</strong></p>
+<blockquote>
+<p>[!IMPORTANT]</p>
+<p>LHS和RHS的含义是“赋值操作的左侧或右侧”并不意味着就是“&#x3D;赋值操作符的左侧或右侧“。赋值操作还有其他几种形式，因此在概念上最好将其理解为<strong>“赋值操作的目标是谁（LHS）”以及“谁是赋值操作的源头”（RHS）</strong></p>
+</blockquote>
+<h4 id="抛出的异常"><a href="#抛出的异常" class="headerlink" title="抛出的异常"></a>抛出的异常</h4><p>  考虑如下代码:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">foo</span>(<span class="hljs-params">a</span>)&#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a+b);<br>  b=a;<br>&#125;<br><span class="hljs-title function_">foo</span>(<span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
+
+<p>第一次对b进行RHS查询是无法找到该变量的。也就是说，b是一个未声明的变量，因为在任何相关作用域都查询不到它。</p>
+<p><strong>如果RHS查询在所有相关作用域中查询不到所需要的变量，引擎就会抛出ReferenceError异常（是一个非常重要的异常）</strong></p>
+<p>相比之下，当引擎执行LHS查询时，若在顶层作用域(全局作用域)中也没有找到所需的变量，全局作用域就会创建一个具有该名称的变量，并将其返回给引擎，<strong>前提是程序运行在非严格模式下</strong>。</p>
+<p>ES5中引入了严格模式，同宽松或者懒惰模式相比，严格模式在行为上有很多不同，其中一个不同就是<strong>严格模式禁止自动或隐式的创建全局变量。</strong>因此在严格模式下LHS查询失败时，全局作用域不会再创建一个所需变量，而是同RHS查询失败一样，抛出ReferenceError异常。</p>
 
                 
               </div>
