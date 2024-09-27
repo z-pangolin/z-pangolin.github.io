@@ -16,15 +16,15 @@
   <meta name="author" content="pangolin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="作用域是什么1.1编译原理传统编译语言  分词&#x2F;词法分析 这个过程将由字符组成的字符串分解成有意义的代码块，这些代码块被称为词法单元。例如。var a&#x3D;2；这段代码会被分解为var，a，&#x3D;，2；空格是否会被当成词法单元取决于空格在这门语言中是否有意义  [!IMPORTANT] 分词和词法解析之间的区别是非常微妙，晦涩的。主要差异在于 词法单元的识别是通过有状态还是无">
+    <meta name="description" content="第1章——作用域是什么1.1编译原理传统编译语言  分词&#x2F;词法分析 这个过程将由字符组成的字符串分解成有意义的代码块，这些代码块被称为词法单元。例如。var a&#x3D;2；这段代码会被分解为var，a，&#x3D;，2；空格是否会被当成词法单元取决于空格在这门语言中是否有意义  [!IMPORTANT] 分词和词法解析之间的区别是非常微妙，晦涩的。主要差异在于 词法单元的识别是通过有">
 <meta property="og:type" content="article">
 <meta property="og:title" content="javascript进阶">
 <meta property="og:url" content="http://example.com/2024/09/21/javascript%E8%BF%9B%E9%98%B6/index.html">
 <meta property="og:site_name" content="Pangolin">
-<meta property="og:description" content="作用域是什么1.1编译原理传统编译语言  分词&#x2F;词法分析 这个过程将由字符组成的字符串分解成有意义的代码块，这些代码块被称为词法单元。例如。var a&#x3D;2；这段代码会被分解为var，a，&#x3D;，2；空格是否会被当成词法单元取决于空格在这门语言中是否有意义  [!IMPORTANT] 分词和词法解析之间的区别是非常微妙，晦涩的。主要差异在于 词法单元的识别是通过有状态还是无">
+<meta property="og:description" content="第1章——作用域是什么1.1编译原理传统编译语言  分词&#x2F;词法分析 这个过程将由字符组成的字符串分解成有意义的代码块，这些代码块被称为词法单元。例如。var a&#x3D;2；这段代码会被分解为var，a，&#x3D;，2；空格是否会被当成词法单元取决于空格在这门语言中是否有意义  [!IMPORTANT] 分词和词法解析之间的区别是非常微妙，晦涩的。主要差异在于 词法单元的识别是通过有">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-21T05:54:31.000Z">
-<meta property="article:modified_time" content="2024-09-24T05:37:48.181Z">
+<meta property="article:modified_time" content="2024-09-25T12:59:01.819Z">
 <meta property="article:author" content="pangolin">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -248,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.8k 字
+          3.5k 字
         
       </span>
     
@@ -259,7 +259,7 @@
         
         
         
-          24 分钟
+          30 分钟
         
       </span>
     
@@ -309,7 +309,7 @@
             
               <div class="markdown-body">
                 
-                <h2 id="作用域是什么"><a href="#作用域是什么" class="headerlink" title="作用域是什么"></a>作用域是什么</h2><h3 id="1-1编译原理"><a href="#1-1编译原理" class="headerlink" title="1.1编译原理"></a>1.1编译原理</h3><p><strong>传统编译语言</strong></p>
+                <h2 id="第1章——作用域是什么"><a href="#第1章——作用域是什么" class="headerlink" title="第1章——作用域是什么"></a>第1章——作用域是什么</h2><h3 id="1-1编译原理"><a href="#1-1编译原理" class="headerlink" title="1.1编译原理"></a>1.1编译原理</h3><p><strong>传统编译语言</strong></p>
 <ul>
 <li><p>分词&#x2F;词法分析</p>
 <p>这个过程将由字符组成的字符串分解成有意义的代码块，这些代码块被称为词法单元。例如。var a&#x3D;2；这段代码会被分解为var，a，&#x3D;，2；空格是否会被当成词法单元取决于空格在这门语言中是否有意义</p>
@@ -371,7 +371,7 @@
 <p>  ES5中引入了严格模式，同宽松或者懒惰模式相比，严格模式在行为上有很多不同，其中一个不同就是<strong>严格模式禁止自动或隐式的创建全局变量。</strong>因此在严格模式下LHS查询失败时，全局作用域不会再创建一个所需变量，而是同RHS查询失败一样，抛出ReferenceError异常。</p>
 <p>  接下来，如果RHS查询找到了一个变量，但你尝试对这个变量进行不合理的操作，比如试图对一个非函数类型的值进行函数调用，或者饮用null或undefined类型的值中的属性，那么引擎会抛出另一种异常，<strong>叫做TypeError。</strong></p>
 <p>  <strong>ReferenceError同作用域判断失败有关，而TypeError则代表作用域判断成功了，但是对结果的操作不合法。</strong></p>
-<h2 id="2-词法作用域"><a href="#2-词法作用域" class="headerlink" title="2.词法作用域"></a>2.词法作用域</h2><h3 id="2-1词法阶段"><a href="#2-1词法阶段" class="headerlink" title="2.1词法阶段"></a>2.1词法阶段</h3><p>  简单来说，词法作用域就是定义在词法阶段的作用域，换句话说，<strong>词法作用域是由你在写代码时将变量和块作用域写在哪里来决定的，因此当词法分析器处理代码时会保持作用域不变(大多数情况下是这样的)。</strong></p>
+<h2 id="第2章——词法作用域"><a href="#第2章——词法作用域" class="headerlink" title="第2章——词法作用域"></a>第2章——词法作用域</h2><h3 id="2-1词法阶段"><a href="#2-1词法阶段" class="headerlink" title="2.1词法阶段"></a>2.1词法阶段</h3><p>  简单来说，词法作用域就是定义在词法阶段的作用域，换句话说，<strong>词法作用域是由你在写代码时将变量和块作用域写在哪里来决定的，因此当词法分析器处理代码时会保持作用域不变(大多数情况下是这样的)。</strong></p>
 <h4 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">foo</span>(<span class="hljs-params">a</span>)&#123;<br>  <span class="hljs-keyword">var</span> b=a*<span class="hljs-number">2</span>;<br>  <span class="hljs-keyword">function</span> <span class="hljs-title function_">bar</span>(<span class="hljs-params">c</span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a,b,c);<br>  &#125;<br>  <span class="hljs-title function_">bar</span>(b*<span class="hljs-number">3</span>);<br>&#125;<br><span class="hljs-title function_">foo</span>(<span class="hljs-number">2</span>);<span class="hljs-comment">// 2,4,12</span><br></code></pre></td></tr></table></figure>
 
 <p>  在该代码片段中，引擎执行console.log（）声明，并查找a，b，c三个变量的引用。首先从最内部作用域查找，若找不到所需变量则会到上一级作用域中再次进行查找，直到查找至全局作用域中。</p>
@@ -404,10 +404,35 @@
 <p>with可以将一个没有或有多个属性的对象处理成一个完全隔离的词法作用域，<strong>因此这个对象的属性也会被处理为定义在这个作用域中的标识符</strong>。</p>
 <blockquote>
 <p>[!NOTE]</p>
-<p><strong>尽管with块可以将一个对象处理成词法作用域，但是这个块内部正常的var声明并不会被限制在这个块的作用域中，而是被添加到with所处的函数作用域中</strong></p>
+<p> <strong>尽管with块可以将一个对象处理成词法作用域，但是这个块内部正常的var声明并不会被限制在这个块的作用域中，而是被添加到with所处的函数作用域中</strong></p>
 </blockquote>
 <p>eval(..)函数如果接受了含有一个或多个声明的代码，就会修改其所处的词法作用域，而with声明实际上是根据你传递给它的对象凭空创建了一个全新的词法作用域。</p>
-<h2 id="函数作用域和块作用域"><a href="#函数作用域和块作用域" class="headerlink" title="函数作用域和块作用域"></a>函数作用域和块作用域</h2>
+<h2 id="第3章——函数作用域和块作用域"><a href="#第3章——函数作用域和块作用域" class="headerlink" title="第3章——函数作用域和块作用域"></a>第3章——函数作用域和块作用域</h2><p>  函数作用域不在这里进行解释，可以去看看《你不知道的JavaScript》中如何讲解函数作用域的。</p>
+<h4 id="块作用域"><a href="#块作用域" class="headerlink" title="块作用域"></a>块作用域</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(i);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们在for循环头部定一个变量i，通常是因为只想在for循环内部的上下文中使用i，而忽略了i会被绑定在外部作用域（函数或全局）中的事实&#x2F;</p>
+<p><strong>变量的声明应该离被使用的地方越近越好，并最大限度的本地化</strong>。</p>
+<p>另外一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> foo = <span class="hljs-literal">true</span>;<br><span class="hljs-keyword">if</span> (foo) &#123;<br>  <span class="hljs-keyword">var</span> a = foo * <span class="hljs-number">2</span>;<br>&#125;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a);<span class="hljs-comment">//2</span><br></code></pre></td></tr></table></figure>
+
+<p>理想的情况是a变量仅仅在if块内部使用，但是由于是var声明的变量，所以还是会属于外部作用域。如果为了将它声明在块内部，尽量避免使用var声明，要使用let进行变量声明。</p>
+<h5 id="垃圾收集"><a href="#垃圾收集" class="headerlink" title="垃圾收集"></a>垃圾收集</h5><p>另一个块作用域非常有用的原因和<strong>闭包及回收内存垃圾的回收机制相关</strong>。这里简要说明一下，内部的实现原理，也就是闭包的机制会在<strong>第5章详细解释</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">process</span>(<span class="hljs-params">data</span>)&#123;<br>  <span class="hljs-comment">//在这里做点有趣的事情</span><br>&#125;<br><span class="hljs-keyword">var</span> somebigData=&#123;...&#125;<br>                 <br><span class="hljs-title function_">process</span>(somebigData)<br><br><span class="hljs-keyword">var</span> btn=<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;my_button&#x27;</span>)<br><br>btn.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;click&quot;</span>,<span class="hljs-keyword">function</span> <span class="hljs-title function_">click</span>(<span class="hljs-params"></span>)&#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;button clicked&quot;</span>);<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p>  cilck函数的点击回调并不需要somebigData变量。理论上这意味着当process（）执行完之后，在内存中占用大量空间的数据结构就可以被垃圾回收了。但是由于<strong>cilck函数形成了一个覆盖全局作用域的闭包</strong>，js引擎极有可能依然保存着这个数据，以备不时之需。</p>
+<p>  块作用域就可以打消这个顾虑，可以让引擎清楚的知道没必要继续保存该数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">process</span>(<span class="hljs-params">data</span>) &#123;<br>  <span class="hljs-comment">//在这里做点有趣的事情</span><br>&#125;<br><br>&#123;<br>  <span class="hljs-keyword">let</span> somebigData = &#123;...&#125;;<br>  <span class="hljs-title function_">process</span>(somebigData);<br>&#125;<br><br><span class="hljs-keyword">var</span> btn = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;my_button&quot;</span>);<br><br>btn.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;click&quot;</span>, <span class="hljs-keyword">function</span> <span class="hljs-title function_">click</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;button clicked&quot;</span>);<br>&#125;);<br><br></code></pre></td></tr></table></figure>
+
+<p>  <strong>为变量声明块作用域，并对变量进行本地绑定是非常有用的工具</strong>。</p>
+<h5 id="let循环"><a href="#let循环" class="headerlink" title="let循环"></a>let循环</h5><p>一个let可以发挥优势的典型例子就是for循环</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(i)<br>&#125;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(i)<span class="hljs-comment">//ReferenceError</span><br></code></pre></td></tr></table></figure>
+
+<p>for循环头部的let不仅将i绑定到了for循环的块中，<strong>事实上他将其重新绑定到了循环的每一个迭代中，确保使用上一次循环迭代结束时的值重新进行赋值</strong>。</p>
+<p>下面通过另一种方式来说明每次迭代时进行重新绑定的行为</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js">&#123;<br>  <span class="hljs-keyword">let</span> j;<br>  <span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;<span class="hljs-number">10</span>;j++)&#123;<br>    <span class="hljs-keyword">let</span> i=j;<span class="hljs-comment">//每个迭代重新绑定！</span><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(i)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>每个迭代重新绑定非常有趣，我们会在第5章讨论闭包时进行说明。</strong></p>
+
                 
               </div>
             
