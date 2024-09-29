@@ -1,0 +1,791 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="pangolin">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="当我们在做需求时，可能经常会遇到很多跟页面的滚动有关的需求。例如  图片的懒加载：我们希望只加载用户当前视图窗口的图片，而未进入到视图窗口的图片，只有在进入到视图窗口时才进行加载，以提高页面响应速度，从而改善用户体验。 无限滚动：我们希望在一个页面在不断下拉的过程中，不断的加载新的内容，而无需进行页面跳转，类似于Vue、React等框架中的虚拟DOM的思想，以提升用户体验。 根据元素位置需求渲染元">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Intersection Observer API解决页面滚动监视">
+<meta property="og:url" content="http://example.com/2024/09/29/Intersection-Observer-API%E8%A7%A3%E5%86%B3%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8%E7%9B%91%E8%A7%86/index.html">
+<meta property="og:site_name" content="Pangolin">
+<meta property="og:description" content="当我们在做需求时，可能经常会遇到很多跟页面的滚动有关的需求。例如  图片的懒加载：我们希望只加载用户当前视图窗口的图片，而未进入到视图窗口的图片，只有在进入到视图窗口时才进行加载，以提高页面响应速度，从而改善用户体验。 无限滚动：我们希望在一个页面在不断下拉的过程中，不断的加载新的内容，而无需进行页面跳转，类似于Vue、React等框架中的虚拟DOM的思想，以提升用户体验。 根据元素位置需求渲染元">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/Users/zhangguanghao/hexo-blog/source/_posts/Intersection-Observer-API%E8%A7%A3%E5%86%B3%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8%E7%9B%91%E8%A7%86/watch.png">
+<meta property="article:published_time" content="2024-09-29T07:19:53.000Z">
+<meta property="article:modified_time" content="2024-09-29T09:07:02.417Z">
+<meta property="article:author" content="pangolin">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/Users/zhangguanghao/hexo-blog/source/_posts/Intersection-Observer-API%E8%A7%A3%E5%86%B3%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8%E7%9B%91%E8%A7%86/watch.png">
+  
+  
+  
+  <title>Intersection Observer API解决页面滚动监视 - Pangolin</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"o9EzKMkL17PsaqAvuGgPtfbb-gzGzoHsz","app_key":"iewAZN6WlQlznZAWtMHfsbma","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Pangolin</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Intersection Observer API解决页面滚动监视"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-29 15:19" pubdate>
+          2024年9月29日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Intersection Observer API解决页面滚动监视</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>当我们在做需求时，可能经常会遇到很多跟页面的滚动有关的需求。例如</p>
+<ul>
+<li><strong>图片的懒加载</strong>：我们希望只加载用户当前视图窗口的图片，而未进入到视图窗口的图片，只有在进入到视图窗口时才进行加载，以提高页面响应速度，从而改善用户体验。</li>
+<li><strong>无限滚动</strong>：我们希望在一个页面在不断下拉的过程中，不断的加载新的内容，而无需进行页面跳转，类似于Vue、React等框架中的虚拟DOM的思想，以提升用户体验。</li>
+<li><strong>根据元素位置需求渲染元素</strong>：根据元素在视图窗口中的不同位置去进行一些或动画效果或者样式的改变。</li>
+</ul>
+<p>当我们拿到这些需求的时候，可能大家最先想到的实现方法都是使用scroll监听，通常过不断轮询目标元素的位置信息，然后计算是否符合特定条件，来进行操作DOM。但是，这种不断轮询方式会在JavaScript的主线程中不断执行，导致性能的极大消耗，很容易就会造成页面的掉帧，从而严重影响用户体验。</p>
+<p>因此使用另一种更好的解决方案<strong>Intersection Observer API</strong>。</p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="&#x3D;&#x3D;优点&#x3D;&#x3D;"></a><strong>&#x3D;&#x3D;优点&#x3D;&#x3D;</strong></h4><ul>
+<li><p><strong>性能强</strong>：</p>
+<ul>
+<li><strong>异步处理</strong>：相比于传统<code>scroll</code>事件监听的，Intersection Observer使用异步回调，避免了阻塞主线程，从而提高了性能。</li>
+<li><strong>减少不必要的计算</strong>：相比于传统的频繁地检查元素的可见性，Intersection Observer只在元素的符合条件下才发生变化时的回调，</li>
+</ul>
+</li>
+<li><p><strong>使用简单</strong>：</p>
+<ul>
+<li><strong>无需手动检测</strong>：使用Intersection Observer，不再需要我们手动编写大量代码来检测元素是否在视口中，在开发更加简单和可维护。</li>
+</ul>
+</li>
+<li><p><strong>实时监测</strong>：</p>
+<ul>
+<li><strong>实时反馈</strong>：它能够即时响应元素的可见性变化，适用于需要实时反馈的交互效果。</li>
+</ul>
+</li>
+<li><p><strong>精确度</strong>：</p>
+<ul>
+<li><strong>自定义阈值</strong>：我们可以手动的设置触发回调的阈值，可以更精确度的根据需求来触发回调。</li>
+</ul>
+</li>
+<li><p><strong>跨浏览器兼容性</strong>：</p>
+<ul>
+<li><strong>兼容性好</strong>：Intersection Observer是标准的Web API，被主流浏览器支持，具有较好的跨浏览器兼容性。</li>
+</ul>
+</li>
+</ul>
+<h4 id="用法"><a href="#用法" class="headerlink" title="&#x3D;&#x3D;用法&#x3D;&#x3D;"></a>&#x3D;&#x3D;用法&#x3D;&#x3D;</h4><p>Intersection Observer API包括4部分：<strong>构造函数</strong>、<strong>观察选项</strong>、<strong>回调函数</strong>和一些<strong>方法</strong></p>
+<ul>
+<li><p><strong>构造函数：IntersectionObserver</strong></p>
+<p>构造函数用于创建Intersection Observer我们的实例，它接受两个参数：回调函数和观察选项。当被观察的元素和我们的窗口视图，或者别的元素的交叉状态满足我们设定的观察选项时，我们的回调函数就会被触发。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> observer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">IntersectionObserver</span>(callback, options);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>观察选项（Options）</strong>：</li>
+</ul>
+<p>观察选项是一个配置对象，用于指定我们的观察规则。它包括3个属性：</p>
+<ul>
+<li><code>root</code>：根元素，用于指定一个容器元素，设为<code>null</code>时会默认使用视口作为根元素。</li>
+<li><code>rootMargin</code>：根元素的边距范围，用像素或百分比表示，该属性值是用作 root 元素和 target 发生交集时候的计算交集的区域范围，用于扩大或缩小可视区域。</li>
+<li><code>threshold</code>：一个触发回调的阈值数组，表示目标元素的可见比例。</li>
+</ul>
+<p><img src="/Users/zhangguanghao/hexo-blog/source/_posts/Intersection-Observer-API%E8%A7%A3%E5%86%B3%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8%E7%9B%91%E8%A7%86/watch.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> options = &#123;<br>  <span class="hljs-attr">root</span>: <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;#container&#x27;</span>), <span class="hljs-comment">// 视口的根元素</span><br>  <span class="hljs-attr">rootMargin</span>: <span class="hljs-string">&#x27;0px&#x27;</span>, <span class="hljs-comment">// 例如 &quot;10px 20px 30px 40px&quot; (top, right, bottom, left)。</span><br>  <span class="hljs-attr">threshold</span>: [<span class="hljs-number">0</span>, <span class="hljs-number">0.25</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.75</span>, <span class="hljs-number">1</span>] <span class="hljs-comment">//这里当目标元素的可见比例分别达到0％、25％、50％、75％和100％时，都会触发回调函数</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>回调函数（Callback Function）</strong>：</li>
+</ul>
+<p>回调函数会在被观察的元素的交叉状态发生变化时被调用。它接收两个参数：<code>entries</code>和<code>observer</code>。</p>
+<ul>
+<li><p><code>entries</code>：一个Intersection Observer Entry对象的数组，每个Entry对象表示一个被观察元素与视口或根元素的交叉状态的信息。</p>
+</li>
+<li><p><code>observer</code>：对观察器本身的引用，通常不需要使用。</p>
+</li>
+</ul>
+<p>每个Entry对象包含以下信息：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-string">`target`</span>：被观察的目标元素，即触发了交叉事件的元素。<br><span class="hljs-string">`time`</span>：发生相交到相应的时间，毫秒。<br><span class="hljs-string">`rootBounds`</span>：根元素矩形区域的信息，如果没有设置根元素则返回 <span class="hljs-literal">null</span>，图中蓝色部分区域。<br><span class="hljs-string">`boundingClientRect`</span>：一个<span class="hljs-title class_">DOMRect</span>对象，描述了目标元素的边界框，包括位置、大小等信息。，图中黑色边框的区域。<br><span class="hljs-string">`intersectionRect`</span>：一个<span class="hljs-title class_">DOMRect</span>对象，表示目标元素与视口或根元素的交叉区域的边界框,图中蓝色方块和粉红色方块相交的区域。<br><span class="hljs-string">`intersectionRatio`</span>：一个介于<span class="hljs-number">0</span>和<span class="hljs-number">1</span>之间的值，表示目标元素的可见比例，<span class="hljs-number">0</span>表示完全不可见，<span class="hljs-number">1</span>表示完全可见。<br><span class="hljs-string">`isIntersecting`</span>：一个布尔值，表示目标元素是否与视口或根元素发生交叉。<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!CAUTION]</p>
+<p>我们注册的回调函数将在主线程中执行，因此我们应该尽量保持函数的执行速度。如果需要执行一些耗时或者会引起阻塞的操作，建议使用 <code>Window.requestIdleCallback()</code> 方法。</p>
+<p>在 Intersection Observer API 中，所有区域都被视为矩形。即使元素的形状不规则，它也会被看作包含该元素所有区域的最小矩形。同样，如果元素与视口的交集部分不是矩形，它也将被看作包含所有交集区域的最小矩形。</p>
+</blockquote>
+<p><strong>方法</strong>：</p>
+<p>Intersection Observer实例还提供了一些方法，可以用于操作观察器的行为：</p>
+<ul>
+<li><code>observe(target)</code>：将目标元素添加到观察器中，开始监测其交叉状态。</li>
+<li><code>unobserve(target)</code>：停止监测特定目标元素的交叉状态。</li>
+<li><code>disconnect()</code>：停止监测所有目标元素的交叉状态，可以在不需要观察器时使用。</li>
+</ul>
+<p>代码示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> observer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">IntersectionObserver</span>(callback, options);<br>observer.<span class="hljs-title function_">observe</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;#element&#x27;</span>));<br>observer.<span class="hljs-title function_">unobserve</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;#element&#x27;</span>));<br>observer.<span class="hljs-title function_">disconnect</span>();<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Intersection Observer API解决页面滚动监视</div>
+      <div>http://example.com/2024/09/29/Intersection-Observer-API解决页面滚动监视/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>pangolin</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年9月29日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/21/javascript%E8%BF%9B%E9%98%B6/" title="javascript进阶">
+                        <span class="hidden-mobile">javascript进阶</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"o9EzKMkL17PsaqAvuGgPtfbb-gzGzoHsz","appKey":"iewAZN6WlQlznZAWtMHfsbma","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
